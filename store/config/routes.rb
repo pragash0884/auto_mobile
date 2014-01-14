@@ -5,6 +5,10 @@ Store::Application.routes.draw do
   # You can have the root of your site routed with "root"
    #root 'user#index'
    get 'user/add_bill' => 'user#add_bill'
+   get 'user/update_brands' => 'user#show_brands'
+   get 'user/update_brand_types' => 'user#show_brand_types'
+   get 'user/update_spare_items' => 'user#show_spare_items'
+
    resources :user
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

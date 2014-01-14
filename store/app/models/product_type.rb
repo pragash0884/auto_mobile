@@ -1,5 +1,11 @@
 class ProductType < ActiveRecord::Base
 has_many :brands
+
+  def self.get_brands(id)
+      p_type = find(id)
+      brands = p_type.brands.compact
+  end
+
 def self.feed
     ##product_types = ["Two Wheelers", "Three Wheelers", "Four Wheelers", "Six Wheelers". "Others"]
     brand_details = {                                                                                                                                                  "Two Wheelers" =>                                                                                                                                              {                                                                                                                                              "TVS"   => ["RTR 160", "RTR 180"],                                                                                                             "Honda" => ["Unicorn", "Shine", "Activa"],

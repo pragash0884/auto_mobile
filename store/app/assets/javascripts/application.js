@@ -14,3 +14,40 @@
 //= require jquery_ujs
 //= require_tree .
 //= require jquery-2.0.2.min
+
+
+function update_brands_div(id) {  
+  jQuery.ajax({
+    url: "update_brands",
+    type: "GET",
+    data: {"product_type_id" : id},
+    dataType: "html",
+    success: function(data) {
+      jQuery("#brands_div").html(data);
+    }
+  });
+}
+
+function update_brands_type(id) {
+  jQuery.ajax({
+    url: "update_brand_types",
+    type: "GET",
+    data: {"brand_id" : id},
+    dataType: "html",
+    success: function(data) {
+      jQuery("#brand_types_div").html(data);
+    }
+  });
+}
+
+function update_spare_items_div(id) {
+  jQuery.ajax({
+    url: "update_spare_items",
+    type: "GET",
+    data: {"brand_type_id" : id},
+    dataType: "html",
+    success: function(data) {
+      jQuery("#spare_items_div").html(data);
+    }
+  });
+}
