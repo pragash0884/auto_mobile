@@ -1,0 +1,11 @@
+<table class="table">
+		<tr>
+			<td><%= @count.to_i%></td>
+			<td><%= text_field 'item','name',:value => ""%></td>
+			<div class="col-xs-2">
+			<td><%= text_field 'item','qty' %></td>
+			</div>
+			<td><%= text_field 'item','price'%></td>
+			<td><%= text_field 'item','total'%></td>
+	</tr>
+</table>
