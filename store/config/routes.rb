@@ -3,7 +3,8 @@ Store::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'user#index'
+   #root 'user#index'
+   get 'user/add_bill' => 'user#add_bill'
    resources :user
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -15,16 +16,17 @@ Store::Application.routes.draw do
   #   resources :products
 
   # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+     #resources :user do
+       #member do
+         #get 'index'
+         #post 'show'
+        # get 'add_bill'
+       #end
+  
+       #collection do
+        # get 'sold'
+       #end
+     #end
 
   # Example resource route with sub-resources:
   #   resources :products do
