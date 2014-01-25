@@ -25,4 +25,8 @@ class UserController < ApplicationController
     render :partial => "spare_items"
   end
 
+  def switch_admin
+    render :action => "admin"
+  end
+
 end

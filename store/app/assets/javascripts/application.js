@@ -51,3 +51,4 @@ function update_spare_items_div(id) {
     }
   });
 }
+

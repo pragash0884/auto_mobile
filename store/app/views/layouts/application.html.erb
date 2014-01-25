@@ -1,15 +1,64 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Store</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%#= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "jquery-2.0.2.min" => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
 
-<%= yield %>
+<html>
+
+<head>
+
+  <title>J.J.R Auto Mobiles Store</title>
+
+  <!-- <label id="code.slt"/> --><%= stylesheet_link_tag    "application", media: "all",
+
+    "data-turbolinks-track" => true %>
+
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %><!-- <label id="code.jlt"/> -->
+
+  <%= csrf_meta_tags %><!-- <label id="code.csrf"/> -->
+
+</head>
+
+<body class="<%= controller.controller_name %>">
+
+
+ <div id="banner">
+<div style="float: left; width: 234px;">
+    <%= image_tag("logo.png") %>
+</div>
+<div style="float: left; width: 1048px; height: 120px;">
+<marquee style="text-align: center; height: 105px; margin: 32px 0px 0px; font-size: 56px;"><%= @page_title || "J.J.R Auto Mobiles Store" %> </marquee>
+</div>
+  </div>
+
+ 
+
+  <div id="columns">
+
+    <div id="side">
+
+      <ul>
+
+        <li><a href="http://www....">Billing</a></li>
+
+        <li><a href="http://www..../faq">Item Master</a></li>
+
+        <li><a href="http://www..../news">Stock Adjustment</a></li>
+
+        <li><a href="http://www..../contact">Reprtts</a></li>
+        <li><a href="http://www..../contact">Contact</a></li>
+
+      </ul>
+
+    </div>
+
+    <div id="main">
+
+      <%= yield %><!-- <label id="code.depot.e.include"/> -->
+
+    </div>
+
+  </div>
 
 </body>
+
 </html>
+
+
