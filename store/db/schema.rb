@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140114110453) do
+ActiveRecord::Schema.define(version: 20140114145317) do
 
   create_table "bill_details", force: true do |t|
     t.integer  "spare_item_id"
@@ -79,6 +79,8 @@ ActiveRecord::Schema.define(version: 20140114110453) do
     t.string   "serial_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "quantity"
+    t.date     "mfg_date"
   end
 
   create_table "users", force: true do |t|

@@ -1,5 +1,5 @@
 <div class="bs-example">
-    <form class="form-horizontal">
+    <%= form_tag({:action => 'save_invoice'}, {:class => 'form-horizontal'}) do %>
       <fieldset>
       <table>
       <tr>
@@ -87,16 +87,23 @@
     </table>
     <div id="abc">
       </div>
-    </form>
+        <div class="" style="float: right; width: 45%; height: 100px;">
+    	<label class="grand_total" for="grand_total" style="width: 150px;">Grand Total</label>
+        <input type="text" id="grand_total" placeholder="Grand Total" style="float: left; margin: -28px 0px 0px 88px; style=">
+    	<!--<button type="save" class="btn btn-success" id="save_item" style="float: right; margin: -30px 83px 0px 0px;">Save</button>-->
+        <%= submit_tag "Saves", :class => "btn btn-success", :style => "float: right; margin: -30px 83px 0px 0px;"%>
+    </div>
+  <%end%>
+
+
 </div>
 
 <script>
 var count = 0;
 $("#add_button").click(function(){
-  var item = $("#product_spare").val();
+  var item = $("#spare_items").val();
   count = count+1;
-  alert(item)
-  data = "item=" + item + "&count" + count;
+  data = "item=" + item + "&count=" + count;
 $.ajax({
    url: "/user/add_bill",
    type: "get",
@@ -106,7 +113,6 @@ $.ajax({
      $("#abc").append(returnData);
    },
    error: function(e){
-     alert(e);
    }
 });  
 }); 

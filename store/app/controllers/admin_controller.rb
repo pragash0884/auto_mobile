@@ -7,4 +7,8 @@ class AdminController < ApplicationController
       ProductType.create(:p_type => params[:product_type_val])
       render :partial => "add_product_items"
   end
+
+  def report
+    #render :action => "admin"
+  end
 end

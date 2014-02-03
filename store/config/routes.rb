@@ -8,10 +8,12 @@ Store::Application.routes.draw do
    get 'user/update_brands' => 'user#show_brands'
    get 'user/update_brand_types' => 'user#show_brand_types'
    get 'user/update_spare_items' => 'user#show_spare_items'
-   get 'user/switch_admin' => 'user#switch_admin'
+   #get 'user/switch_admin' => 'user#switch_admin'
+   post 'user/save_invoice' => 'user#save_invoice'
 
    get 'admin/product_feed' => 'admin#product_feed'
    get 'admin/add_product_items' => 'admin#add_product_items'
+   get '/admin/report' => 'admin#report'
 
    resources :user
   # Example of regular route:

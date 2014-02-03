@@ -6,8 +6,11 @@ class UserController < ApplicationController
   end
 
   def add_bill
-    @item = SpareItem.find_by_item_name(params[:item])
+    @item = SpareItem.find(params[:item])
+    @qty = params[:qty].blank? ? 1 : params[:qty]
+    @total = (@qty * @item.price)
     @count = params[:count].to_i
+    render :partial => "add_bill"
   end
 
   def show_brands
@@ -25,8 +28,7 @@ class UserController < ApplicationController
     render :partial => "spare_items"
   end
 
-  def switch_admin
-    render :action => "admin"
+  def save_invoice
   end
 
 end
