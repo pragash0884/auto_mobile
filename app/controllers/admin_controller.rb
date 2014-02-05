@@ -26,7 +26,13 @@ class AdminController < ApplicationController
 
 
   def report
+    @bill = Bill.includes(:bill_details)
     #render :action => "admin"
   end
 
+   def generate_report
+     @bill = Bill.find(params[:bill_id])
+     @pdf = @bill.generate_pdf(@bill)
+     send_data(@pdf.render, :filename => "output_#{@bill.id}.pdf", :type => "application/pdf", :disposition => "inline")
+   end
 end

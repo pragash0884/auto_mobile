@@ -41,5 +41,34 @@
 			</table>
 		</fieldset>
 	</form>
+  <table class="table">
+    <tr>
+      <th>sl</th>
+      <th>Bill No</th>
+      <th>Discount</th>
+      <th>Tax</th>
+      <th>Total</th>
+      <th>Print</th>
+    </tr>
+  </table>
+  <div id="abc">
+    <table class="table">
 
+      <tr>
+      <%@bill.each_with_index do |bill,i|%>
+        <td><%= i+1%></td>
+            <td></td>
+        <td><%=bill.bill_no%></td>
+         <td></td>
+        <td><%= bill.discount%></td>
+            <td></td>
+        <td><%= bill.tax%></td>
+            <td></td>
+        <td><%= bill.total_amount %></td>
+            <td></td>
+        <td><%=link_to("Click Here","/admin/print/#{bill.id}")%></td>
+       <%end%>
+      </tr>
+    </table>
+  </div>
 </div>

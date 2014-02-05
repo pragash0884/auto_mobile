@@ -8,6 +8,8 @@ class UserController < ApplicationController
   def add_bill
     @item = SpareItem.find(params[:item])
     @qty = params[:qty].blank? ? 1 : params[:qty]
+    @customer = Coustomer.create(params[:customer])
+    @bill = @customer.bills.create(params[:bill])
     @total = (@qty * @item.price)
     @count = params[:count].to_i
     render :partial => "add_bill"

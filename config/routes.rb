@@ -8,6 +8,7 @@ Store::Application.routes.draw do
    get 'user/update_brands' => 'user#show_brands'
    get 'user/update_brand_types' => 'user#show_brand_types'
    get 'user/update_spare_items' => 'user#show_spare_items'
+   get '/admin/print/:bill_id' => 'admin#generate_report'
    #get 'user/switch_admin' => 'user#switch_admin'
    post 'user/save_invoice' => 'user#save_invoice'
 

@@ -1,5 +1,5 @@
 <div class="bs-example">
-    <%= form_tag({:action => 'save_invoice'}, {:class => 'form-horizontal'}) do %>
+    <%= form_tag({:action => 'save_invoice'}, {:class => 'form-horizontal',:id => "add_bill"}) do %>
       <fieldset>
       <table>
       <tr>
@@ -7,7 +7,7 @@
         <div class="control-group">
             <label class="control-label" for="inputEmail">Custemer Name</label>
             <div class="controls">
-                <input type="text" id="custemer_name" placeholder="Custemer Name">
+                <input type="text" id="custemer_name" placeholder="Custemer Name",name="customer[name]">
             </div>
         </div>
     </td>
@@ -15,7 +15,7 @@
         <div class="control-group">
             <label class="control-label" for="inputPassword">Date</label>
             <div class="controls">
-                <input name="date" class="form-control datepicker" data-date-format="dd/mm/yyyy" id="checkout" placeholder="click here">
+                <input name="date" class="form-control datepicker" data-date-format="dd/mm/yyyy" id="checkout" placeholder="click here",name="customer[purchase_date]">
             </div>
         </div>
     </td>
@@ -25,7 +25,7 @@
       <div class="control-group">
             <label class="control-label" for="inputEmail">Email</label>
             <div class="controls">
-                <input type="text" id="email" placeholder="Email"><i class="icon-envelope"></i>
+                <input type="text" id="email" placeholder="Email"><i class="icon-envelope",name="customer[email]"></i>
             </div>
         </div>
     </td>
@@ -33,7 +33,7 @@
       <div class="control-group">
             <label class="control-label" for="inputEmail">Phone</label>
             <div class="controls">
-                <input type="text" id="email" placeholder="Phone">
+                <input type="text" id="email" placeholder="Phone",name="custome[phone]">
             </div>
         </div>
     </td>
@@ -76,6 +76,8 @@
     <br>
     <br>
     <br>
+      <%end%>
+      <%= form_tag({:action => 'save_invoice'}, {:class => 'form-horizontal'}) do %>
     <table class="table">
       <tr>
       <th>sl</th>
@@ -102,6 +104,7 @@
 var count = 0;
 $("#add_button").click(function(){
   var item = $("#spare_items").val();
+
   count = count+1;
   data = "item=" + item + "&count=" + count;
 $.ajax({

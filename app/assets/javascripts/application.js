@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-//= require jquery-2.0.2.min
+//= require jquery.min
 
 
 function update_brands_div(id) {  
