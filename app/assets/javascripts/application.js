@@ -54,11 +54,13 @@ function update_spare_items_div(id) {
 
 function update_grand_total(count){
 var grand_total = 0
+var total = 0
 for (var i=1; i<=count; i++){
     div_id = "#item_" + i + "_total"
-    grand_total = grand_total + parseInt($(div_id).val());
+    total += grand_total + parseInt($(div_id).val());
 }
-$('#grand_total').val(grand_total);
+$('#grand_total').val(total);
 }
+
 
 

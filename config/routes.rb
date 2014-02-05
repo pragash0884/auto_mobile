@@ -3,7 +3,7 @@ Store::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   #root 'user#index'
+   root 'user#index'
    get 'user/add_bill' => 'user#add_bill'
    get 'user/update_brands' => 'user#show_brands'
    get 'user/update_brand_types' => 'user#show_brand_types'
