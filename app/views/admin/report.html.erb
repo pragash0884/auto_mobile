@@ -1,10 +1,10 @@
 <div class="bs-example">
-	<form class="form-horizontal">
     		<fieldset>
 		      <table style="margin:35px 0 0 105px">
+		      	<%=form_tag("/admin/customer_report", :method=>:get) do |f| %>
       			<tr>
 			      <td>
-			        <div class="control-group">
+			      	  <div class="control-group">
 			            <label class="control-label" for="inputEmail">Product Name</label>
 			            <div class="controls">
 			                <input type="text" id="custemer_name" placeholder="Custemer Name">
@@ -25,7 +25,8 @@
 				      <div class="control-group">
 				            <label class="control-label" for="inputEmail">Email</label>
 				            <div class="controls">
-				                <input type="text" id="email" placeholder="Email"><i class="icon-envelope"></i>
+				            	<%= text_field_tag :email, "", :placeholder=>"Email" %>
+<i class="icon-envelope"></i>
 				            </div>
 				      </div>
 			      </td>
@@ -37,10 +38,24 @@
 				            </div>
 				      </div>
 			     </td>
+			     </tr>
+			     <tr>
+			     <td>
+				      <div class="control-group">
+				            <%= submit_tag("Submit") %>
+				      </div>
+			     </td>
+			     <td>
+				      <div class="control-group">
+				            <%=link_to("Click Here for pdf","/admin/report-hard-copy?customer_id=#{@customer.id}") unless @customer.blank?%>
+				      </div>
+			     </td>
+			     </tr>
+			     <%end%>
 			  </tr>
 			</table>
 		</fieldset>
-	</form>
+
   <table class="table">
     <tr>
       <th>sl</th>
@@ -53,10 +68,8 @@
   </table>
   <div id="abc">
     <table class="table">
-
-      <tr>
-      <%@bill.each_with_index do |bill,i|%>
-        <td><%= i+1%></td>
+      <%@bills.each_with_index do |bill,i|%>
+        <tr><td><%= i+1%></td>
             <td></td>
         <td><%=bill.bill_no%></td>
          <td></td>
@@ -66,9 +79,9 @@
             <td></td>
         <td><%= bill.total_amount %></td>
             <td></td>
-        <td><%=link_to("Click Here","/admin/print/#{bill.id}")%></td>
+        <td><%=link_to("Click Here","/admin/print/#{bill.id}")%></td></tr>
        <%end%>
-      </tr>
+      
     </table>
   </div>
 </div>

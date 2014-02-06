@@ -15,6 +15,9 @@ Store::Application.routes.draw do
    get 'admin/product_feed' => 'admin#product_feed'
    get 'admin/add_product_items' => 'admin#add_product_items'
    get '/admin/report' => 'admin#report'
+   get '/admin/customer_report' => 'admin#get_customer_reports'
+   get '/admin/report-hard-copy' => 'admin#customer_reports_pdf'
+
 
    resources :user
   # Example of regular route:

@@ -6,9 +6,9 @@ class UserController < ApplicationController
   end
 
   def add_bill
-    @item = SpareItem.find(params[:item])
+    @item = SpareItem.find(params[:spare_items])
     @qty = params[:qty].blank? ? 1 : params[:qty]
-    @customer = Coustomer.create(params[:customer])
+    @customer = Customer.where(:email => params[:customer][:email]).first || Customer.create(bill_params)
     @bill = @customer.bills.create(params[:bill])
     @total = (@qty * @item.price)
     @count = params[:count].to_i
@@ -32,5 +32,9 @@ class UserController < ApplicationController
 
   def save_invoice
   end
+  private
 
+  def bill_params
+    params.require(:ad).permit(:name,email,:phone)
+  end
 end
