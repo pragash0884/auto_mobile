@@ -1,20 +1,14 @@
 <table class="table">
 		<tr>
 			<td><%= @count%></td>
-			<td><%= text_field "item[#{@count}]","name" ,:value => @item.item_name, :readonly => true%></td>
+			<td><%= text_field_tag "item[#{@count}][name]",@item.item_name, :readonly => true%></td>
 			<div class="col-xs-2">
-			<td><%= text_field "item[#{@count}]", "quantity" , :value => @qty%></td>
+			<td><%= text_field_tag "item[#{@count}][quantity]",@qty%></td>
 			</div>
-			<td><%= text_field "item[#{@count}]", "price", :value => @item.price, :readonly => true%></td>
-			<td><%= text_field "item[#{@count}]", "total", :value => @total, :readonly => true %></td>
-          <%= hidden_field_tag "item[#{@count}]",''%>
-          <%= hidden_field_tag "item[#{@count}]",''%>
-          <%= hidden_field_tag "item[#{@count}]",''%>
-          <%= hidden_field_tag "item[#{@count}]",''%>
-          <%= hidden_field_tag "item[#{@count}]",''%>
-          <%= hidden_field_tag "item[#{@count}]",''%>
-          <%= hidden_field_tag "item[#{@count}]",''%>
-          <%= hidden_field_tag "item[#{@count}]",''%>
+			<td><%= text_field_tag "item[#{@count}][price]", @item.price, :readonly => true%></td>
+			<td><%= text_field_tag "item[#{@count}][total]",@total, :readonly => true %></td>
+          <%= hidden_field_tag "customer",@customer.id%>
+          <%= hidden_field_tag "item[#{@count}][spare_id]",@item.id%>
 	</tr>
 </table>
 <script>

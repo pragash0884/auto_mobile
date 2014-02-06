@@ -6,7 +6,8 @@ class UserController < ApplicationController
   end
 
   def add_bill
-    @item = SpareItem.find(params[:spare_items])
+    @item = SpareItem.find(params[:spare][:spare_item_id])
+
     @qty = params[:qty].blank? ? 1 : params[:qty]
     @customer = Customer.where(:email => params[:customer][:email]).first || Customer.create(bill_params_customer)
     @bill = @customer.bills.create(params[:bill])
@@ -31,6 +32,13 @@ class UserController < ApplicationController
   end
 
   def save_invoice
+    @customer = Customer.find(params[:customer])
+    @bill = @customer.bills.create(:bill_no => Bill.count + 1,:total_amount => params[:grand_total])
+    params[:item].each_pair do |key,item|
+      debugger
+        @bill.bill_details.create(:spare_item_id => item[:spare_id])
+    end
+   redirect_to "/user/login_validate"
   end
 
   def supplier

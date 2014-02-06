@@ -82,7 +82,11 @@ var grand_total = 0
 var total = 0
 for (var i=1; i<=count; i++){
     div_id = "#item_" + i + "_total"
+    console.log(div_id);
+    if ($(div_id).length) {
     total += grand_total + parseInt($(div_id).val());
+    }
+    console.log(total);
 }
 $('#grand_total').val(total);
 }
