@@ -8,7 +8,7 @@ class UserController < ApplicationController
   def add_bill
     @item = SpareItem.find(params[:spare_items])
     @qty = params[:qty].blank? ? 1 : params[:qty]
-    @customer = Customer.where(:email => params[:customer][:email]).first || Customer.create(bill_params)
+    @customer = Customer.where(:email => params[:customer][:email]).first || Customer.create(bill_params_customer)
     @bill = @customer.bills.create(params[:bill])
     @total = (@qty * @item.price)
     @count = params[:count].to_i
@@ -32,9 +32,35 @@ class UserController < ApplicationController
 
   def save_invoice
   end
-  private
 
-  def bill_params
-    params.require(:ad).permit(:name,email,:phone)
+  def supplier
+  @suppliers = Supplier.all
   end
+  def save_supplier
+    debugger
+    @supplier = Supplier.where(:email => params[:customer][:email]).first || Supplier.create(bill_params)
+    @bill = @supplier.bills.create(:bill_no => Bill.count + 1,:total_amount => params[:bill][:price])
+    @bill_details = @bill.bill_details.create(bill_detail_params)
+    @count = params[:count].to_i
+    render :partial => "add_supplier"
+  end
+  def find_spare_items
+    @spares = BillDetail.where(:spare_item_id => params[:spare_id])
+    render :partial => "spares"
+  end
+
+
+
+private
+
+def bill_params
+  params.require(:customer).permit(:name,:email,:mobile)
+end
+def bill_params_customer
+  params.require(:customer).permit(:name,:email,:phone)
+end
+
+def bill_detail_params
+  params.require(:spare).permit(:spare_item_id)
+end
 end

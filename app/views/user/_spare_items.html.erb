@@ -1,1 +1,1 @@
-<%= select_tag "spare_items", options_from_collection_for_select(@spare_items, "id", "item_name"), :prompt => "Select Any One "%>
+<%= select_tag "spare[spare_item_id]", options_from_collection_for_select(@spare_items, "id", "item_name"), :prompt => "Select Any One", :onchange => "different_spare(this.value)"%>

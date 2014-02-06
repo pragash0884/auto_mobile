@@ -1,6 +1,7 @@
 class Bill < ActiveRecord::Base
 belongs_to :customer
 has_many :bill_details
+belongs_to :supplier
 require 'prawn'
 def generate_pdf(bill)
   Prawn::Document.new do

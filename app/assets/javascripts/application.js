@@ -40,6 +40,17 @@ function update_brands_type(id) {
   });
 }
 
+    function supplier_div(id) {
+         var id = id
+         if(id == ""){
+             $(".supplier_name").show();
+         }
+        else{
+             $(".supplier_name").hide();
+         }
+        }
+
+
 function update_spare_items_div(id) {
   jQuery.ajax({
     url: "update_spare_items",
@@ -50,6 +61,20 @@ function update_spare_items_div(id) {
       jQuery("#spare_items_div").html(data);
     }
   });
+}
+
+
+function different_spare(id) {
+    jQuery.ajax({
+        url: "find_spare_items",
+        type: "GET",
+        data: {"spare_id" : id},
+        dataType: "html",
+        success: function(data) {
+            jQuery(".spare_price_div1").show();
+            jQuery("#spare_price_div").html(data);
+        }
+    });
 }
 
 function update_grand_total(count){
