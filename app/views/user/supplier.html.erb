@@ -1,0 +1,152 @@
+<div class="bs-example">
+  <%= form_tag({:action => 'save_supplier'}, {:class => 'form-horizontal',:id => "add_supplier11"}) do %>
+      <fieldset>
+        <table>
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label" for="inputEmail">Supplier Name</label>
+                <div class="controls">
+                  <%= select_tag "customer[name]", (options_from_collection_for_select(Supplier.all, "id", "name") + "<option value=new>Add New</option>"), :prompt => "Add New", :onchange => "supplier_div(this.value)" %>
+                  <div class="supplier_name" style="display: none">
+                  <input type="text" id="custemer_name" placeholder="Supplier Name" name="customer[name]">
+                    </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label" for="inputEmail">Email</label>
+                <div class="controls">
+                  <input type="text" id="email" placeholder="Email" name="customer[email]"><i class="icon-envelope" ></i>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label" for="inputEmail">Phone</label>
+                <div class="controls">
+                  <input type="text" id="email" placeholder="Phone" name="customer[mobile]">
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label class="control-label" for="brandtype">Product Type</label>
+              <div class="controls">
+                <%= select_tag "product_typ_id", options_from_collection_for_select(ProductType.all, "id", "p_type"), :prompt => "Select Any One", :onchange => "update_brands_div(this.value)" %>
+              </div>
+            </td>
+            <td>
+              <label class="control-label" for="brand">Brand</label>
+              <div class="controls" id="brands_div">
+                <%= select("main","brand",[], :prompt => "Select a Product Type")%>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label class="control-label" for="brandtype">Brand Type</label>
+              <div class="controls" id="brand_types_div">
+                <%= select("brand","type",[], :prompt => "Select a Brand")%>
+              </div>
+            </td>
+            <td>
+              <label class="control-label" for="productspare">Product Spare</label>
+              <div class="controls" id="spare_items_div">
+                <%= select("spare","spare_item_id",[], :prompt => "Select a Brand Type")%>
+              </div>
+            </td>
+          </tr>
+          <td></td><td></td><td></td><td></td>
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label" for="inputEmail">Spare Price</label>
+                <div class="controls">
+                  <div class="supplier_name">
+                    <input type="text" placeholder="Enter the price" name="bill[price]">
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+      <br>
+      <br>
+      <div class="controls" align="center">
+        <button type="button" class="btn btn-success" id="add_suppiler">Add</button>
+      </div>
+      <br>
+      <br>
+      <br>
+      <table class="table spare_price_div1" style="display: none">
+        <tr>
+          <th>sl</th>
+          <th>Supiler Name</th>
+          <th>Bill No</th>
+          <th>Price</th>
+        </tr>
+      </table>
+      <div id="spare_price_div">
+      </div>
+  <%end%>
+  <fieldset>
+  <table class="table supplier_show">
+    <tr>
+      <th>sl</th>
+      <th>Supiler Name</th>
+      <th>Item name</th>
+      <th>Price</th>
+    </tr>
+    <table class="table" >
+      <%@suppliers.each_with_index do |supplier,index|%>
+      <tr>
+
+          <td><%= index+1%></td>
+            <td> <%= supplier.name%></td>
+
+
+      </tr>
+      <%end%>
+    </table>
+  </table>
+  </fieldset>
+  <div id="supplier_show">
+  </div>
+    </div>
+
+
+<script>
+    var count = 0;
+    $("#add_suppiler").click(function(){
+        var item = $("#spare_items").val();
+
+        count = count+1;
+        data = $( "#add_supplier11" ).serialize() + "&count=" + count;
+        $.ajax({
+            url: "/user/save_supplier",
+            type: "get",
+            dataType: "html",
+            data: data,
+            success: function(returnData){
+                $("#supplier_show").append(returnData);
+            },
+            error: function(e){
+            }
+        });
+    });
+    $("#customer_name").click(function(){
+        var id = $("#customer_name").val();
+        if(id == ""){
+            $(".supplier_name").show();
+        }
+        else{
+            $(".supplier_name").hide();
+        }
+    });
+</script>

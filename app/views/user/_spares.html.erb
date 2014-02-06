@@ -1,0 +1,10 @@
+  <table class="table">
+    <%@spares.each_with_index do |spare,index|%>
+        <tr>
+          <td><%= index+1%></td>
+          <td> <%= spare.bill.supplier.name%></td>
+          <td> <%= spare.bill.bill_no%></td>
+          <td> <%= spare.bill.total_amount%></td>
+        </tr>
+    <%end%>
+  </table>
