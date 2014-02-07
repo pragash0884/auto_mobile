@@ -25,6 +25,8 @@ Store::Application.routes.draw do
   get 'admin/add_brand_types' => 'admin#add_brand_types'
   get 'admin/update_spare_items' => 'admin#update_spare_items'
   get '/user/get_supplier' => 'user#get_supplier'
+   get 'admin/update_price_qty' => 'admin#update_price_qty'
+
 
 
 

@@ -22,6 +22,13 @@ class AdminController < ApplicationController
     render :partial => "user/spare_items"
   end
 
+  def update_price_qty
+     if params[:product_spare_id] != ""
+       @spare_items = SpareItem.find(params[:product_spare_id])
+    end
+    render :partial => "update_price_qty"
+  end
+
   def add_product_item
 
 
