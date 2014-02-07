@@ -16,80 +16,96 @@
 //= require jquery.min
 
 
-function update_brands_div(id) {  
-  jQuery.ajax({
-    url: "update_brands",
-    type: "GET",
-    data: {"product_type_id" : id},
-    dataType: "html",
-    success: function(data) {
-      jQuery("#brands_div").html(data);
-    }
-  });
+function update_brands_div(id) {
+    jQuery.ajax({
+        url: "/user/update_brands",
+        type: "GET",
+        data: {"product_type_id" : id},
+        dataType: "html",
+        success: function(data) {
+            jQuery("#brands_div").html(data);
+        }
+    });
 }
 
 function update_brands_type(id) {
-  jQuery.ajax({
-    url: "update_brand_types",
-    type: "GET",
-    data: {"brand_id" : id},
-    dataType: "html",
-    success: function(data) {
-      jQuery("#brand_types_div").html(data);
-    }
-  });
+    jQuery.ajax({
+        url: "/user/update_brand_types",
+        type: "GET",
+        data: {"brand_id" : id},
+        dataType: "html",
+        success: function(data) {
+            jQuery("#brand_types_div").html(data);
+        }
+    });
 }
 
-    function supplier_div(id) {
-         var id = id
-         if(id == ""){
-             $(".supplier_name").show();
-         }
-        else{
-             $(".supplier_name").hide();
-         }
-        }
+function supplier_div(id) {
+    var id = id
+    if(id == ""){
+        $(".supplier_name").show();
+    }
+    else{
+        $(".supplier_name").hide();
+        $.ajax({
+            url: "/user/get_supplier",
+            type: "get",
+            dataType: "json",
+            data: {"id" : id},
+            success: function(returnData){
+                $("#email").val(returnData.email);
+                $("#mobile").val(returnData.mobile);
+            },
+            error: function(e){
+            }
+        });
+    }
+}
 
 
 function update_spare_items_div(id) {
-  jQuery.ajax({
-    url: "update_spare_items",
-    type: "GET",
-    data: {"brand_type_id" : id},
-    dataType: "html",
-    success: function(data) {
-      jQuery("#spare_items_div").html(data);
-    }
-  });
+    jQuery.ajax({
+        url: "/user/update_spare_items",
+        type: "GET",
+        data: {"brand_type_id" : id},
+        dataType: "html",
+        success: function(data) {
+            jQuery("#spare_items_div").html(data);
+        }
+    });
 }
 
 
 function different_spare(id) {
     jQuery.ajax({
-        url: "find_spare_items",
+        url: "/user/find_spare_items",
         type: "GET",
         data: {"spare_id" : id},
         dataType: "html",
         success: function(data) {
+            if(data == "empty"){
+                jQuery(".spare_price_div1").hide();
+            }
+            else{
             jQuery(".spare_price_div1").show();
             jQuery("#spare_price_div").html(data);
+            }
         }
     });
 }
 
 function update_grand_total(count){
-var grand_total = 0
-var total = 0
-for (var i=1; i<=count; i++){
-    div_id = "#item_" + i + "_total"
-    console.log(div_id);
-    if ($(div_id).length) {
-    total += grand_total + parseInt($(div_id).val());
+    var grand_total = 0
+    var total = 0
+    for (var i=1; i<=count; i++){
+        div_id = "#item_" + i + "_total"
+        console.log(div_id);
+        if ($(div_id).length) {
+            total += grand_total + parseInt($(div_id).val());
+        }
+        console.log(total);
     }
-    console.log(total);
+    $('#grand_total').val(total);
 }
-$('#grand_total').val(total);
-}
-
 
 

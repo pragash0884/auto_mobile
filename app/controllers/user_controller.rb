@@ -36,6 +36,9 @@ class UserController < ApplicationController
     @bill = @customer.bills.create(:bill_no => Bill.count + 1,:total_amount => params[:grand_total])
     params[:item].each_pair do |key,item|
       debugger
+        spare_item = SpareItem.find(item[:spare_id])
+        spare_item.quantity = spare_item.quantity - item[:quantity].to_i
+        spare_item.save
         @bill.bill_details.create(:spare_item_id => item[:spare_id])
     end
    redirect_to "/user/login_validate"
@@ -49,12 +52,23 @@ class UserController < ApplicationController
     @supplier = Supplier.where(:email => params[:customer][:email]).first || Supplier.create(bill_params)
     @bill = @supplier.bills.create(:bill_no => Bill.count + 1,:total_amount => params[:bill][:price])
     @bill_details = @bill.bill_details.create(bill_detail_params)
+    spare_item = SpareItem.find(params[:spare][:spare_item_id])
+    spare_item.quantity = spare_item.quantity.to_i + params[:quantity].to_i
+    spare_item.save
     @count = params[:count].to_i
     render :partial => "add_supplier"
   end
+  def get_supplier
+    supplier = Supplier.find(params[:id])
+    render :json => {:name => supplier.name,:email => supplier.email,:mobile => supplier.mobile}.to_json
+  end
   def find_spare_items
-    @spares = BillDetail.where(:spare_item_id => params[:spare_id])
+    @spares = BillDetail.where(:bill_id => Bill.where("supplier_id is not null").collect(&:id)).where(:spare_item_id => params[:spare_id])
+    if @spares.blank?
+      render :text => "empty"
+      else
     render :partial => "spares"
+    end
   end
 
 

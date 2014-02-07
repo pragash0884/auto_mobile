@@ -33,7 +33,7 @@
       <div class="control-group">
             <label class="control-label" for="inputEmail">Phone</label>
             <div class="controls">
-                <input type="text" id="email" placeholder="Phone" name="customer[phone]">
+                <input type="text" id="phone" placeholder="Phone" name="customer[phone]">
             </div>
         </div>
     </td>
@@ -104,7 +104,10 @@
 var count = 0;
 $("#add_button").click(function(){
   var item = $("#spare_items").val();
-
+    var custemer_name = $("#custemer_name").val();
+    var email = $("#email").val();
+    var phone = $("#phone").val();
+    if(custemer_name != '' && email != '' &&  phone != '') {
   count = count+1;
   data = $( "#add_bill" ).serialize() + "&count=" + count;
 $.ajax({
@@ -117,6 +120,12 @@ $.ajax({
    },
    error: function(e){
    }
-});  
+});
+    }
+    else{
+
+        alert("Please enter customer Details");
+        return false;
+    }
 }); 
 </script>

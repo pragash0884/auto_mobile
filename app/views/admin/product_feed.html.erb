@@ -6,8 +6,8 @@ Saleth
         <tr>
           <td>
             <label class="control-label" for="brandtype">Product Type</label>
-            <div class="controls">
-              <%= select_tag "product_type_id", options_from_collection_for_select(ProductType.all, "id", "p_type"), :prompt => "Select Any One" %>
+            <div class="controls" >
+              <%= select_tag "product_type_id", options_from_collection_for_select(ProductType.all, "id", "p_type"), :prompt => "Select Any One", :onchange => "update_brands_div(this.value)" %>
             </div>
           </td>
           <td>
@@ -25,13 +25,13 @@ Saleth
         <tr>
           <td>
             <label class="control-label" for="brandtype">Brand</label>
-            <div class="controls">
-              <%= select_tag "product_typ_id", options_from_collection_for_select(ProductType.all, "id", "p_type"), :prompt => "Select Any One" %>
+            <div class="controls" id = "brands_div">
+              <%= select_tag "main_brand", options_from_collection_for_select(Brand.all, "id", "name"), :prompt => "Select Any One" %>
             </div>
           </td>
           <td>
             <div class="control-group" style="margin-bottom: 2px;">
-              <input name="brand_id" class="form-control datepicker" id="add_brand_val" placeholder="Add Brand">
+              <input name="brand_id" class="form-control datepicker" id="add_brand_val" placeholder="Add Brand Type">
             </div>
           </td>
           <td>
@@ -44,13 +44,13 @@ Saleth
         <tr>
           <td>
             <label class="control-label" for="brandtype">Brand Type</label>
-            <div class="controls">
-              <%= select_tag "brand_type_id", options_from_collection_for_select(ProductType.all, "id", "p_type"), :prompt => "Select Any One" %>
+            <div class="controls" id="spare_items_brand_div">
+              <%= select_tag "brand_type_id", options_from_collection_for_select(BrandType.all, "id", "brand_name"), :prompt => "Select Any One" , :onchange => "update_spare_items_div(this.value)"%>
             </div>
           </td>
           <td>
             <div class="control-group" style="margin-bottom: 2px;">
-              <input name="product_type" class="form-control datepicker" id="add_brand_type_val" placeholder="Add Brand Type">
+              <input name="product_type" class="form-control datepicker" id="add_brand_type_val" placeholder="Add Product Spare">
             </div>
           </td>
           <td>
@@ -63,13 +63,17 @@ Saleth
         <tr>
           <td>
             <label class="control-label" for="brandtype">Product Spare</label>
-            <div class="controls">
-              <%= select_tag "product_spare_id", options_from_collection_for_select(ProductType.all, "id", "p_type"), :prompt => "Select Any One" %>
+            <div class="controls"  id="spare_items_div">
+              <%= select_tag "product_spare_id", options_from_collection_for_select(SpareItem.all, "id", "item_name"), :prompt => "Select Any One" %>
             </div>
           </td>
+
           <td>
             <div class="control-group" style="margin-bottom: 2px;">
-              <input name="product_type" class="form-control datepicker" id="add_product_spare_val" placeholder="Add Product Spare">
+              <input name="product_type" class="form-control datepicker" id="add_product_spare_val" placeholder="Enter Product Spare"></br>
+              <input name="product_price" class="form-control " id="add_product_spare_price" placeholder="Enter Price"></br>
+              <input name="product_qty" class="form-control " id="add_product_spare_qty" placeholder="Enter Qty">
+
             </div>
           </td>
           <td>
@@ -83,6 +87,7 @@ Saleth
     </fieldset>
   </form>
 </div>
+<%=javascript_include_tag "jquery-1.7.2.js"%>
 <script>
     jQuery("#add_product_type_btn").click(function(){
         var val = $("#add_product_type_val").val();
@@ -105,16 +110,18 @@ Saleth
 
     jQuery("#add_brand_btn").click(function(){
                 var item = $("#add_brand_val").val();
-                if(item !=''){
+                var product = $("#product_type_id").val();
+
+                if(item !='' && product != ''){
                     alert("twst");
                     jQuery.ajax({
 
-                        url: "update_spare_items",
+                        url: "update_brands",
                         type: "GET",
-                        data: {"brand_type_id" : item},
+                        data: {"brand_type_name" : item,"product_type" : product},
                         dataType: "html",
                         success: function(data) {
-                            jQuery("#spare_items_div").html(data);
+                            jQuery("#main_brand").html(data);
                         }
                     });
                 }
@@ -127,14 +134,16 @@ Saleth
 
     jQuery("#add_brand_type_btn").click(function(){
                 var item = $("#add_brand_type_val").val();
-                if(item !=''){
+                var product = $("#product_type_id").val();
+                var brand = $("#main_brand").val();
+                if(item !='' && product != ''&& brand != ''){
                     jQuery.ajax({
-                        url: "update_spare_items",
+                        url: "add_brand_types",
                         type: "GET",
-                        data: {"brand_type_id" : item},
+                        data: {"brand_type_id" : item,"brand_id" : brand},
                         dataType: "html",
                         success: function(data) {
-                            jQuery("#spare_items_div").html(data);
+                            jQuery("#spare_items_brand_div").html(data);
                         }
                     });
                 }
@@ -148,11 +157,17 @@ Saleth
 
     jQuery("#add_product_spare_btn").click(function(){
                 var item = $("#add_product_spare_val").val();
-                if(item !=''){
+                var product = $("#product_type_id").val();
+                var brand = $("#main_brand").val();
+                var brand_type = $("#brand_type_id").val();
+                var spare_price = $("#add_product_spare_price").val();
+                var spare_qty = $("#add_product_spare_qty").val();
+
+                if(item !='' && product != ''&& brand != ''&& brand_type != ''){
                     jQuery.ajax({
                         url: "update_spare_items",
                         type: "GET",
-                        data: {"brand_type_id" : item},
+                        data: {"spare_name": item,"spare_price": spare_price,"spare_qty": spare_qty,"brand_type": brand_type},
                         dataType: "html",
                         success: function(data) {
                             jQuery("#spare_items_div").html(data);

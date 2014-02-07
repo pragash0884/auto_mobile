@@ -28,7 +28,7 @@
               <div class="control-group">
                 <label class="control-label" for="inputEmail">Phone</label>
                 <div class="controls">
-                  <input type="text" id="email" placeholder="Phone" name="customer[mobile]">
+                  <input type="text" id="mobile" placeholder="Phone" name="customer[mobile]">
                 </div>
               </div>
             </td>
@@ -57,7 +57,8 @@
             <td>
               <label class="control-label" for="productspare">Product Spare</label>
               <div class="controls" id="spare_items_div">
-                <%= select("spare","spare_item_id",[], :prompt => "Select a Brand Type")%>
+                <%= select("spare","spare_item_id",[], :prompt => "Select a Brand Type")%></br></br>
+              </div>
               </div>
             </td>
           </tr>
@@ -67,7 +68,7 @@
               <div class="control-group">
                 <label class="control-label" for="inputEmail">Spare Price</label>
                 <div class="controls">
-                  <div class="supplier_name">
+                  <div class="supplier_name_price">
                     <input type="text" placeholder="Enter the price" name="bill[price]">
                   </div>
                 </div>
@@ -144,9 +145,12 @@
         var id = $("#customer_name").val();
         if(id == ""){
             $(".supplier_name").show();
+            $("#email").val("");
+            $("#mobile").val("");
         }
         else{
             $(".supplier_name").hide();
+
         }
     });
 </script>
