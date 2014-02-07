@@ -1,0 +1,2 @@
+
+<%= select_tag "product_type_id", options_from_collection_for_select(ProductType.all, "id", "p_type",@product.id),{ :onchange => "update_brands_div(this.value)"} %>
