@@ -10,7 +10,6 @@ class UserController < ApplicationController
     @item = SpareItem.find(params[:spare][:spare_item_id])
     @qty = params[:qty].blank? ? 1 : params[:qty]
     @customer = Customer.where(:phone => params[:customer][:phone]).first || Customer.create(bill_params_customer)
-    debugger
     if @customer.errors.full_messages.blank?
     @bill = @customer.bills.create(params[:bill])
     @total = (@qty * @item.price)
