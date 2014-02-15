@@ -1,1 +1,1 @@
-<%= select_tag "main_brand", options_from_collection_for_select(@brands, "id", "name",@brand.try(:id)),:onchange => "update_brands_type(this.value)"%>
+<%= select_tag "main_brand", options_from_collection_for_select(@brands, "id", "name",@brand.try(:id)), :prompt => "Select Any One",:onchange => "update_brands_type(this.value)"%>

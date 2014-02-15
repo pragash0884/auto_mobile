@@ -103,24 +103,33 @@
 <script>
 var count = 0;
 $("#add_button").click(function(){
-  var item = $("#spare_items").val();
+  var item = $("#spare_spare_item_id").val();
     var custemer_name = $("#custemer_name").val();
     var email = $("#email").val();
     var phone = $("#phone").val();
-    if(custemer_name != '' && email != '' &&  phone != '') {
+    if(custemer_name != '' && email != '' &&  phone != '' && item != '') {
   count = count+1;
   data = $( "#add_bill" ).serialize() + "&count=" + count;
+        console.log('#spare_spare_item_id option[value="'+ item +'"]');
+
 $.ajax({
    url: "/user/add_bill",
    type: "get",
    dataType: "html",
    data: data,
-   success: function(returnData){
-     $("#abc").append(returnData);
-   },
-   error: function(e){
-   }
-});
+   success: function(returnData,status){
+     if(status ==400){
+         alert(returnData);
+         return false;
+             }
+     else{
+         $("#abc").append(returnData);
+         $('#spare_spare_item_id option[value="'+ item +'"]').remove();
+
+     }
+
+     }
+  });
     }
     else{
 

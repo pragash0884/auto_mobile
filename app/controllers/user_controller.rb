@@ -8,13 +8,17 @@ class UserController < ApplicationController
 
   def add_bill
     @item = SpareItem.find(params[:spare][:spare_item_id])
-
     @qty = params[:qty].blank? ? 1 : params[:qty]
-    @customer = Customer.where(:email => params[:customer][:email]).first || Customer.create(bill_params_customer)
+    @customer = Customer.where(:phone => params[:customer][:phone]).first || Customer.create(bill_params_customer)
+    debugger
+    if @customer.errors.full_messages.blank?
     @bill = @customer.bills.create(params[:bill])
     @total = (@qty * @item.price)
     @count = params[:count].to_i
     render :partial => "add_bill"
+    else
+      render :text => @customer.errors.full_messages,:status => 400
+    end
   end
 
   def show_brands
