@@ -69,7 +69,7 @@
                 <label class="control-label" for="inputEmail">Spare Price</label>
                 <div class="controls">
                   <div class="supplier_name_price">
-                    <input type="text" placeholder="Enter the price" name="bill[price]">
+                    <input type="text" placeholder="Enter the price" name="bill[price]" id="spare_price">
                   </div>
                 </div>
               </div>
@@ -108,12 +108,15 @@
   </div>
   <fieldset>
   <table class="table supplier_show">
+    <thead>
     <tr>
       <th>sl</th>
       <th>Supiler Name</th>
       <th>Mobile</th>
       <th>Email</th>
     </tr>
+    </thead>
+    <tbody id="supplier_show">
       <%@suppliers.each_with_index do |supplier,index|%>
       <tr>
 
@@ -121,15 +124,13 @@
           <td> <%= supplier.name%></td>
         <td> <%= supplier.email%></td>
         <td> <%= supplier.mobile%></td>
-
-
       </tr>
       <%end%>
+    </tbody>
   </table>
 
   </fieldset>
-  <div id="supplier_show">
-  </div>
+
   <%= paginate @suppliers %>
     </div>
 
@@ -137,8 +138,16 @@
 <script>
     var count = 0;
     $("#add_suppiler").click(function(){
-        var item = $("#spare_items").val();
-
+        var item = $("#spare_spare_item_id").val();
+        var price = $("#spare_price").val();
+        var quantity = $("#spare_quantity").val();
+        var email = $("#email").val();
+        var mobile = $("#mobile").val();
+        var product_typ = $("#product_typ_id").val();
+        var brand = $("#main_brand").val();
+        var brand_typ = $("#brand_type_id").val();
+        var name = $("#supplier_form_name").val();
+        if(name != '' && item != '' && price != '' &&  quantity != '' && email != ''&& mobile != '' &&  product_typ != '' && brand != ''&& brand_typ != '') {
         count = count+1;
         data = $( "#add_supplier11" ).serialize() + "&count=" + count;
         $.ajax({
@@ -148,10 +157,18 @@
             data: data,
             success: function(returnData){
                 $("#supplier_show").append(returnData);
+                $("#email").val("");
+                $("#mobile").val("");
+                $("#supplier_form_name").val("");
             },
             error: function(e){
             }
         });
+        }
+        else{
+            alert("Please Enter Valid Data");
+            return false;
+        }
     });
     $("#customer_name").click(function(){
         var id = $("#customer_name").val();
@@ -159,6 +176,7 @@
             $(".supplier_name").show();
             $("#email").val("");
             $("#mobile").val("");
+            $("#custemer_name").addClass("supplier_form_name");
         }
         else{
             $(".supplier_name").hide();

@@ -56,6 +56,7 @@ function supplier_div(id) {
             success: function(returnData){
                 $("#email").val(returnData.email);
                 $("#mobile").val(returnData.mobile);
+                $("#custemer_name").removeClass("supplier_form_name");
             },
             error: function(e){
             }
