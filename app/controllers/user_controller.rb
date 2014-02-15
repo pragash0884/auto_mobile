@@ -53,7 +53,7 @@ class UserController < ApplicationController
   end
   def save_supplier
     debugger
-    @supplier = Supplier.where(:email => params[:customer][:email]).first || Supplier.create(bill_params)
+    @supplier = Supplier.where(:mobile => params[:customer][:mobile]).first || Supplier.create(bill_params)
     @bill = @supplier.bills.create(:bill_no => Bill.count + 1,:total_amount => params[:bill][:price])
     @bill_details = @bill.bill_details.create(bill_detail_params)
     spare_item = SpareItem.find(params[:spare][:spare_item_id])

@@ -85,36 +85,46 @@
       <br>
       <br>
       <br>
-      <table class="table spare_price_div1" style="display: none">
+      <div  class="spare_price_div1" style="display: none" >
+        <b>Difference List</b>
+      <table class="table">
+
+        <thead>
+
         <tr>
           <th>sl</th>
           <th>Supiler Name</th>
-          <th>Bill No</th>
+          <th>Spare Item</th>
           <th>Price</th>
-        </tr>
+          </tr>
+        </thead>
+          <tbody id="spare_price_div">
+          </tbody>
       </table>
-      <div id="spare_price_div">
       </div>
   <%end%>
+  <div>
+    <strong>Supplier List</strong>
+  </div>
   <fieldset>
   <table class="table supplier_show">
     <tr>
       <th>sl</th>
       <th>Supiler Name</th>
-      <th>Item name</th>
-      <th>Price</th>
+      <th>Mobile</th>
+      <th>Email</th>
     </tr>
-    <table class="table" >
       <%@suppliers.each_with_index do |supplier,index|%>
       <tr>
 
           <td><%= index+1%></td>
-            <td> <%= supplier.name%></td>
+          <td> <%= supplier.name%></td>
+        <td> <%= supplier.email%></td>
+        <td> <%= supplier.mobile%></td>
 
 
       </tr>
       <%end%>
-    </table>
   </table>
 
   </fieldset>

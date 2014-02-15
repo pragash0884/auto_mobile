@@ -57,6 +57,7 @@
 		</fieldset>
 
   <table class="table">
+    <thead>
     <tr>
       <th>sl</th>
       <th>Bill No</th>
@@ -65,23 +66,19 @@
       <th>Total</th>
       <th>Print</th>
     </tr>
-  </table>
-  <div id="abc">
-    <table class="table">
+    </thead>
+  <tbody id="abc">
       <%@bills.each_with_index do |bill,i|%>
-        <tr><td><%= i+1%></td>
-            <td></td>
+        <tr>
+          <td><%= i+1%></td>
         <td><%=bill.bill_no%></td>
-         <td></td>
         <td><%= bill.discount%></td>
-            <td></td>
         <td><%= bill.tax%></td>
-            <td></td>
         <td><%= bill.total_amount %></td>
-            <td></td>
-        <td><%=link_to("Click Here","/admin/print/#{bill.id}")%></td></tr>
+        <td><%=link_to("Click Here","/admin/print/#{bill.id}")%></td>
+        </tr>
        <%end%>
-      
+     </tbody>
     </table>
 
     <%= paginate @bills unless @bills.class.to_s == 'Array'%>
