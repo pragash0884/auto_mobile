@@ -6,17 +6,25 @@ require 'prawn'
 def generate_pdf(bill)
   Prawn::Document.new do
     text_box "J.J.R Auto Mobiles Store", :at => [175, y - 50]
+    move_down 20
+    text_box "Mob: 9902123409", :at => [200, y - 50]
     move_down 30
-      text_box "Bill No",:kerning => true, :at => [100, y - 50]
-      text_box "Discount", :kerning => true, :at => [200, y - 50]
-      text_box "Tax", :kerning => true, :at => [300, y - 50]
-      text_box "Total", :kerning => true, :at => [400, y - 50]
-      move_down 20
-        move_down 20
-        text_box "#{bill.bill_no}",:kerning => true, :at => [100, y - 50]
-        text_box "#{bill.discount}", :kerning => true, :at => [200, y - 50]
-        text_box "#{bill.tax}", :kerning => true, :at => [300, y - 50]
-        text_box "#{bill.total_amount}", :kerning => true, :at => [400, y - 50]
+      text_box "Name",:kerning => true, :at => [25, y - 50]
+      text_box "Email",:kerning => true, :at => [150, y - 50]
+      text_box "Phone",:kerning => true, :at => [275, y - 50]
+      text_box "Bill No",:kerning => true, :at => [350, y - 50]
+      text_box "Discount", :kerning => true, :at => [400, y - 50]
+      text_box "Tax", :kerning => true, :at => [475, y - 50]
+      text_box "Total", :kerning => true, :at => [500, y - 50]
+      move_down 10
+        move_down 10
+        text_box "#{bill.customer.name rescue nil}",:kerning => true, :at => [25, y - 50]
+        text_box "#{bill.customer.email  rescue nil}",:kerning => true,:at => [150, y - 50]
+        text_box "#{bill.customer.phone  rescue nil}",:kerning => true, :at => [275, y - 50]
+        text_box "#{bill.bill_no}",:kerning => true, :at => [350, y - 50]
+        text_box "#{bill.discount}", :kerning => true, :at => [400, y - 50]
+        text_box "#{bill.tax}", :kerning => true, :at => [475, y - 50]
+        text_box "#{bill.total_amount}", :kerning => true, :at => [500, y - 50]
         move_down 20
   end
 end

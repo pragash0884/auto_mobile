@@ -10,6 +10,8 @@ def generate_bills_pdf(bills)
  		Prawn::Document.new do
       text_box "J.J.R Auto Mobiles Store", :at => [175, y - 50]
       move_down 20
+      text_box "Mob: 9902123409", :at => [200, y - 50]
+      move_down 20
       text_box "sl",:kerning => true, :at => [50, y - 50]
       text_box "Bill No",:kerning => true, :at => [100, y - 50]
       text_box "Discount", :kerning => true, :at => [200, y - 50]
