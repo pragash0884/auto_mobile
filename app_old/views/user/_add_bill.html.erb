@@ -1,0 +1,29 @@
+<table class="table">
+		<tr>
+			<td><%= @count%></td>
+			<td><%= text_field "item[#{@count}]","name" ,:value => @item.item_name, :readonly => true%></td>
+			<div class="col-xs-2">
+			<td><%= text_field "item[#{@count}]", "quantity" , :value => @qty%></td>
+			</div>
+			<td><%= text_field "item[#{@count}]", "price", :value => @item.price, :readonly => true%></td>
+			<td><%= text_field "item[#{@count}]", "total", :value => @total, :readonly => true %></td>
+          <%= hidden_field_tag "item[#{@count}]",''%>
+          <%= hidden_field_tag "item[#{@count}]",''%>
+          <%= hidden_field_tag "item[#{@count}]",''%>
+          <%= hidden_field_tag "item[#{@count}]",''%>
+          <%= hidden_field_tag "item[#{@count}]",''%>
+          <%= hidden_field_tag "item[#{@count}]",''%>
+          <%= hidden_field_tag "item[#{@count}]",''%>
+          <%= hidden_field_tag "item[#{@count}]",''%>
+	</tr>
+</table>
+<script>
+   update_grand_total("<%=@count%>")
+   $("#item_<%= @count%>_quantity").change(function() {
+   qty = this.value;
+   price = <%= @item.price%>
+   item_total = (qty * price)
+   $('#item_<%= @count%>_total').val(item_total);
+   update_grand_total("<%=@count%>")
+});
+</script>

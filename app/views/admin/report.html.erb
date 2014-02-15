@@ -5,17 +5,17 @@
       			<tr>
 			      <td>
 			      	  <div class="control-group">
-			            <label class="control-label" for="inputEmail">Product Name</label>
+			            <label class="control-label" for="inputEmail">Customer Name</label>
 			            <div class="controls">
-			                <input type="text" id="custemer_name" placeholder="Custemer Name">
+                          <%= text_field_tag "customer[name]",params[:customer][:name], :placeholder=>"Please enter customer name" %>
 			            </div>
 			        </div>
 			      </td>
 			      <td>
 				<div class="control-group">
-                                    <label class="control-label" for="inputEmail">Date</label>
+                                    <label class="control-label" for="inputEmail">Please Enter Billed Date</label>
                                     <div class="controls">
-                                        <input type="text" id="date" placeholder="Date">
+                                      <%= text_field_tag "bill[date]",params[:customer][:date], :class=>"datepicker" %>
                                     </div>
                                 </div>
 			      </td>
@@ -25,7 +25,7 @@
 				      <div class="control-group">
 				            <label class="control-label" for="inputEmail">Email</label>
 				            <div class="controls">
-				            	<%= text_field_tag :email, "", :placeholder=>"Email" %>
+				            	<%= text_field_tag "customer[email]",params[:customer][:email], :placeholder=>"Please enter Email" %>
 <i class="icon-envelope"></i>
 				            </div>
 				      </div>
@@ -34,7 +34,7 @@
 				      <div class="control-group">
 				            <label class="control-label" for="inputEmail">Phone</label>
 				            <div class="controls">
-				                <input type="text" id="email" placeholder="Phone">
+                              <%= text_field_tag "customer[phone]",params[:customer][:phone], :placeholder=>"Please enter phone" %>
 				            </div>
 				      </div>
 			     </td>
@@ -83,5 +83,10 @@
        <%end%>
       
     </table>
+
+    <%= paginate @bills unless @bills.class.to_s == 'Array'%>
   </div>
 </div>
+<script>
+
+</script>

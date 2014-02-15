@@ -1,7 +1,8 @@
 class AddDeviseToUsers < ActiveRecord::Migration
   def self.up
-    change_table(:users) do |t|
+    create_table(:users) do |t|
       ## Database authenticatable
+      t.string :email
       t.string :encrypted_password, :null => false, :default => ""
 
       ## Recoverable

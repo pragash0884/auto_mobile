@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-
+  before_filter :authenticate_user!
   def product_feed
   end
 
@@ -44,7 +44,8 @@ class AdminController < ApplicationController
   end
 
   def report
-    @bills = Bill.includes(:bill_details)
+    @bills = Bill.includes(:bill_details).order(:updated_at).page(params[:page])
+    params[:customer] = params[:customer] || {}
     #render :action => "admin"
   end
 
@@ -55,8 +56,13 @@ class AdminController < ApplicationController
   end
 
   def get_customer_reports
-    @customer = Customer.where(:email=>params[:email]).first
-    @bills = @customer.bills
+    customer = Customer.search(params[:customer])
+    bills = Bill.search(params[:bill]).blank? ?  [] : Bill.search(params[:bill])
+    customer.each do |cus|
+      bills << cus.bills
+    end unless customer.blank?
+    @bills = bills.flatten
+    @bills = @bills.class.to_s == "Array" ? @bills : @bills.page(params[:page]).per(5)
     render :template=>"/admin/report", :layout=>true
   end
 

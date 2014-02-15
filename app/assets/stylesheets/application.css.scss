@@ -51,7 +51,7 @@
   #main {
     float: left;
     height: auto;
-    width: 1064px;
+    width: 993px;
     /*background-image:url('bg_img.png');*/
     border: medium solid #0199CD;
     height: auto;
@@ -64,7 +64,7 @@
     width: 16%;
     background: none;
     border: medium solid #0199CD;
-    height: 600px;
+    height: 496px;
     margin: 0px 0px 0px 2px;
 
     ul {
@@ -80,6 +80,8 @@
     }
   }
 }
-
+fieldset {
+  margin-top: 2%;
+}
 
 

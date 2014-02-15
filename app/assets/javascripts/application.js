@@ -12,8 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 //= require jquery.min
+//= require bootstrap-datepicker
+//= require_tree .
 
 
 function update_brands_div(id) {
@@ -109,3 +110,9 @@ function update_grand_total(count){
 }
 
 
+$(function() {
+    $(".datepicker").datepicker({
+        format:'dd/mm/yyyy',
+        autoclose: true
+    });
+});

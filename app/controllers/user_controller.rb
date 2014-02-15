@@ -1,4 +1,5 @@
 class UserController < ApplicationController
+  before_filter :authenticate_user!
   def index
   end
 
@@ -45,7 +46,7 @@ class UserController < ApplicationController
   end
 
   def supplier
-  @suppliers = Supplier.all
+  @suppliers = Supplier.order(:updated_at).page(params[:page])
   end
   def save_supplier
     debugger

@@ -1,0 +1,1 @@
+<%= select_tag "brand_types", options_from_collection_for_select(@brand_types, "id", "brand_name"), :prompt => "Select Any One", :onchange => "update_spare_items_div(this.value)"%>
