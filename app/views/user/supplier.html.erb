@@ -96,6 +96,7 @@
           <th>Supiler Name</th>
           <th>Spare Item</th>
           <th>Price</th>
+          <th>Purchased Date</th>
           </tr>
         </thead>
           <tbody id="spare_price_div">
@@ -114,6 +115,7 @@
       <th>Supiler Name</th>
       <th>Mobile</th>
       <th>Email</th>
+      <th>See Details</th>
     </tr>
     </thead>
     <tbody id="supplier_show">
@@ -124,8 +126,9 @@
           <td> <%= supplier.name%></td>
         <td> <%= supplier.email%></td>
         <td> <%= supplier.mobile%></td>
+        <%= content_tag(:td,link_to("See More",'#',"data-href" =>"/admin/show_spplier_billdetails?supplier_id=#{supplier.id}",:class =>"popup")) %>
       </tr>
-      <%end%>
+            <%end%>
     </tbody>
   </table>
 
@@ -136,6 +139,11 @@
 
 
 <script>
+
+    $('.popup').click(function (event) {
+        event.preventDefault();
+        window.open($(this).attr("data-href"), "popupWindow");
+    });
     var count = 0;
     $("#add_suppiler").click(function(){
         var item = $("#spare_spare_item_id").val();

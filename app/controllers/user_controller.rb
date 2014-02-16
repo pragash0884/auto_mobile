@@ -35,21 +35,29 @@ class UserController < ApplicationController
     render :partial => "spare_items"
   end
 
+  def show_bill_details
+     @customer = Customer.find(params[:customer_id])
+     @bills= Bill.where(customer_id: params[:customer_id]).last
+     @bill_details = BillDetail.where(bill_id: @bills.id)
+    
+     @spare_item = SpareItem.find(params[:spare])
+  end
+
+
   def save_invoice
     @customer = Customer.find(params[:customer])
     @bill = @customer.bills.create(:bill_no => Bill.count + 1,:total_amount => params[:grand_total])
     params[:item].each_pair do |key,item|
-      debugger
-        spare_item = SpareItem.find(item[:spare_id])
-        spare_item.quantity = spare_item.quantity - item[:quantity].to_i
-        spare_item.save
-        @bill.bill_details.create(:spare_item_id => item[:spare_id])
+      @spare_item = SpareItem.find(item[:spare_id])
+      @spare_item.quantity = @spare_item.quantity - item[:quantity].to_i
+      @spare_item.save
+      @bill.bill_details.create(:spare_item_id => item[:spare_id])
     end
-   redirect_to "/user/login_validate"
+    redirect_to :action => 'show_bill_details',:customer_id => @customer.id,:spare => @spare_item.id
   end
 
   def supplier
-  @suppliers = Supplier.order(:updated_at).page(params[:page])
+  @suppliers = Supplier.order("updated_at desc").page(params[:page])
   end
   def save_supplier
     debugger

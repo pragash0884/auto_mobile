@@ -26,8 +26,12 @@ Store::Application.routes.draw do
   get 'admin/update_spare_items' => 'admin#update_spare_items'
   get '/user/get_supplier' => 'user#get_supplier'
    get 'admin/update_price_qty' => 'admin#update_price_qty'
+   get '/admin/show_spplier_billdetails' => 'admin#show_spplier_billdetails'
+get 'admin/add_spares' => 'admin#add_spares'
+   get 'admin/spare_items' => 'admin#spare_items'
+  # get 'admin/find_spare_items' => 'admin#find_spare_items'
 
-
+ get 'user/show_bill_details' => 'user#show_bill_details'
 
 
   resources :user

@@ -3,8 +3,9 @@
         <tr>
           <td><%= index+1%></td>
           <td> <%= spare.bill.supplier.name rescue false%></td>
-          <td> <%= spare.bill.bill_no%></td>
+          <td> <%= spare.spare_item.item_name%></td>
           <td> <%= spare.bill.total_amount%></td>
+          <td> <%= spare.created_at%></td>
         </tr>
     <%end%>
   </table>

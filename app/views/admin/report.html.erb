@@ -55,11 +55,15 @@
 			  </tr>
 			</table>
 		</fieldset>
-
+  <div id="reportprint">
+  <center> <label><b>J.J.R Auto Mobiles Store</b> </label></center>
+  <center> <label><b>Bills Details</b> </label></center>
   <table class="table">
     <thead>
     <tr>
       <th>sl</th>
+      <th>Customer Name</th>
+      <th>Customer Ph</th>
       <th>Bill No</th>
       <th>Discount</th>
       <th>Tax</th>
@@ -70,7 +74,9 @@
   <tbody id="abc">
       <%@bills.each_with_index do |bill,i|%>
         <tr>
-          <td><%= i+1%></td>
+        <td><%= i+1%></td>
+        <td><%=bill.customer.try(:name)%></td>
+        <td><%=bill.customer.try(:phone)%></td>
         <td><%=bill.bill_no%></td>
         <td><%= bill.discount%></td>
         <td><%= bill.tax%></td>
@@ -80,10 +86,20 @@
        <%end%>
      </tbody>
     </table>
-
+</div>
+  <center><button onclick="myFunctionprint()">Print</button></center>
     <%= paginate @bills unless @bills.class.to_s == 'Array'%>
   </div>
 </div>
 <script>
-
+    function myFunctionprint()
+    {
+        var print = $("#reportprint").html();
+        var winPrint = window.open('', '', 'left=0,top=0,width=800,height=600,toolbar=0,scrollbars=0,status=0');
+        winPrint.document.write(print);
+        winPrint.document.close();
+        winPrint.focus();
+        winPrint.print();
+        winPrint.close();
+    }
 </script>

@@ -1,0 +1,23 @@
+<table class="table">
+    <tr>
+        <td><b>Sl No.</b></td>
+        <td><b>Product Type</b></td>
+        <td><b>Brand</b></td>
+        <td><b>Brand Type</b></td>
+        <td><b>Spare Item</b></td>
+        <td><b>Price </b></td>
+        <td><b> Quantity</b></td>
+    </tr>
+     <% count = 1 -%>
+<tr>
+         <td><%= count%></td>
+         <td><%= @product.p_type%></td>
+         <td><%= @brands.name%></td>
+         <td><%= @brand_type.brand_name%></td>
+         <td><%= @spares.item_name%></td>
+         <td><%= @spares.price%></td>
+         <td><%= @spares.quantity%></td>
+         <% count += 1 -%>
+    </tr>    
+</table>
+<center>

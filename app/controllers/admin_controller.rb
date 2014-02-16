@@ -19,6 +19,7 @@ class AdminController < ApplicationController
   def update_spare_items
     @brand_type = BrandType.find(params[:brand_type])
     @brand_types = @brand_type.spare_items.find_or_create_by(:item_name => params[:spare_name],:price => params[:spare_price],:quantity=> params[:spare_qty])
+    @spare_items = @brand_type.spare_items
     render :partial => "user/spare_items"
   end
 
@@ -44,7 +45,7 @@ class AdminController < ApplicationController
   end
 
   def report
-    @bills = Bill.includes(:bill_details).order(:updated_at).page(params[:page])
+    @bills = Bill.includes(:bill_details).order("updated_at desc").page(params[:page])
     params[:customer] = params[:customer] || {}
     #render :action => "admin"
   end
@@ -74,5 +75,8 @@ class AdminController < ApplicationController
     else
       render :text=> "No bills"
     end
+  end
+  def show_spplier_billdetails
+    @supplier = Supplier.find(params[:supplier_id])
   end
 end

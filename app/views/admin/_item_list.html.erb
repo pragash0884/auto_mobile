@@ -1,0 +1,25 @@
+<table class="table">
+    <tr>
+        <td><b>Sl No.</b></td>
+        <td><b>Product Type</b></td>
+        <td><b>Brand</b></td>
+        <td><b>Brand Type</b></td>
+        <td><b>Spare Item</b></td>
+        <td><b>Price </b></td>
+        <td><b> Quantity</b></td>
+    </tr>
+     <% count = 1 -%>
+  <% @product_type = SpareItem.all%>
+     <% @product_type.each do |type|%>
+    <tr>
+         <td><%= count%></td>
+         <td><%= type.brand_type.brand.product_type.p_type rescue nil%></td>
+      <td><%= type.brand_type.brand.name rescue nil%></td>
+      <td> <%= type.brand_type.brand_name rescue nil%>
+      <td> <%= type.item_name%></td>
+      <td> <%= type.quantity%></td>
+          <%= count += 1 -%>
+    </tr>  
+    <%end%> 
+</table>
+<center>

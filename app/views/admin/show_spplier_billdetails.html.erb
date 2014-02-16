@@ -1,0 +1,51 @@
+<%supplier = @supplier%>
+<div id="online_suppiler_<%=supplier.id%>"  class="show_publish_later" style="border: 4px solid #1E6492;">
+  <div>
+    <h3 style="padding: 0px 136px;"></br>Suppiler Details</h3></br>
+    <div id="printdiv" class="printable">
+      <table class="table">
+
+        <center> <label><b>J.J.R Auto Mobiles Store</b> </label></center>
+        <center> <label><b>Bills Details</b> </label></center>
+        <tr><td><b>Customer Name :</b><%= supplier.name%></td></tr>
+        <tr><td><b>Email ID : </b><%= supplier.email%></td></tr>
+        <tr><td><b>Phone No :</b><%= supplier.mobile %></td></tr>
+        <%supplier.bills.each do |bill|%>
+            <tr>
+              <td><b>Sl No.</b></td>
+              <td><b>Product Type</b></td>
+              <td><b>Brand</b></td>
+              <td><b>Brand Type</b></td>
+              <td><b>Spare Item</b></td>
+            </tr>
+            <% count = 1 -%>
+
+            <% bill.bill_details.each do |bill_detial|%>
+                <tr>
+                  <td><%= count%></td>
+                  <td><%= bill_detial.spare_item.brand_type.brand.product_type.p_type%></td>
+                  <td><%= bill_detial.spare_item.brand_type.brand.name%></td>
+                  <td><%= bill_detial.spare_item.brand_type.brand_name%></td>
+                  <td><%= bill_detial.spare_item.item_name%></td>
+                  <% count += 1 -%>
+                </tr>
+            <%end%>
+            <tr><td><b>Total Amount : </b> Rs <%= bill.total_amount %></td></tr>
+        <%end%>
+      </table>
+      <center><button onclick="myFunctionbill('online_suppiler_<%=supplier.id%>')">Print</button></center>
+    </div>
+  </div>
+</div>
+<script>
+    function myFunctionbill(id)
+    {
+        var print = $("#"+id).html();
+        var winPrint = window.open('', '', 'left=0,top=0,width=800,height=600,toolbar=0,scrollbars=0,status=0');
+        winPrint.document.write(print);
+        winPrint.document.close();
+        winPrint.focus();
+        winPrint.print();
+        winPrint.close();
+    }
+</script>

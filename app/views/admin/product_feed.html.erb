@@ -1,4 +1,3 @@
-Saleth
 <div class="bs-example">
   <form class="form-horizontal">
     <fieldset>
@@ -70,10 +69,11 @@ Saleth
 
           <td>
             <div class="control-group" style="margin-bottom: 2px;">
-              <input name="product_type" class="form-control" id="add_product_spare_val" placeholder="Enter Product Spare"></br>
-              <input name="product_price" class="form-control " id="add_product_spare_price" placeholder="Enter Price"></br>
-              <input name="product_qty" class="form-control " id="add_product_spare_qty" placeholder="Enter Qty">
-
+               <div id="spare_div">
+                  <input name="product_type" class="form-control " id="add_product_spare_val" placeholder="Enter Product Spare"></br>
+                  <input name="product_price" class="form-control " id="add_product_spare_price" placeholder="Enter Price"></br>
+                  <input name="product_qty" class="form-control " id="add_product_spare_qty" placeholder="Enter Qty">
+              </div>
             </div>
           </td>
           <td>
@@ -84,10 +84,10 @@ Saleth
         </tr>
 
       </table>
+           <%= render :partial => "item_list" %>
     </fieldset>
   </form>
 </div>
-<%=javascript_include_tag "jquery-1.7.2.js"%>
 <script>
     jQuery("#add_product_type_btn").click(function(){
         var val = $("#add_product_type_val").val();
@@ -161,7 +161,7 @@ Saleth
                 var brand = $("#main_brand").val();
                 var brand_type = $("#brand_type_id").val();
                 var spare_price = $("#add_product_spare_price").val();
-                var spare_qty = $("#add_product_spare_qty").val();
+                var spare_qty = $("#spare_quantity").val();
 
                 if(item !='' && product != ''&& brand != ''&& brand_type != ''){
                     jQuery.ajax({
@@ -180,4 +180,18 @@ Saleth
 
             }
     );
+  function spare_items_list_div(brand_typeid,brand,product,spare_id) {
+  jQuery.ajax({
+    url: "add_spares",
+    type: "GET",
+    data: {"brand_type_id" : brand_typeid,"product_id" : product,"spare" : spare_id,"main_brand" : brand},
+    dataType: "html",
+    success: function(returnData){
+     $("#abc").append(returnData);
+   },
+   error: function(e){
+   }
+  });
+}
+
 </script>

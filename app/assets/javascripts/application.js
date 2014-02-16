@@ -77,8 +77,20 @@ function update_spare_items_div(id) {
     });
 }
 
+function k_update_spare_items_div(id) {
+    jQuery.ajax({
+        url: "/user/k_update_spare_items",
+        type: "GET",
+        data: {"brand_type_id" : id},
+        dataType: "html",
+        success: function(data) {
+            jQuery("#spare_items_div").html(data);
+        }
+    });
+}
 
-function different_spare(id) {
+
+function different_spare(id,flag) {
     jQuery.ajax({
         url: "/user/find_spare_items",
         type: "GET",
@@ -117,3 +129,20 @@ $(function() {
         autoclose: true
     });
 });
+function update_price_qyt_div(id) {
+    if (id != ""){
+      $('#add_product_spare_btn').html('Update');
+         }
+         else {
+          $('#add_product_spare_btn').html('Add');
+        }
+      jQuery.ajax({
+        url: "/admin/update_price_qty",
+        type: "GET",
+        data: {"product_spare_id" : id},
+        dataType: "html",
+        success: function(data) {
+          jQuery("#spare_div").html(data);
+        }
+      });
+}
